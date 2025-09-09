@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GIS Study Agent</title>
+    <meta name="description" content="Conversational GIS study agent with voice + text, embedded via ElevenLabs." />
+    <style>
+      :root{
+        --bg:#0b1220;/* night-sky */
+        --panel:#0f1b33;/* card */
+        --ink:#e7f1ff;/* text */
+        --muted:#9fc0ff;/* subtext */
+        --accent:#2ee6a6;/* geo-green */
+      }
+      html,body{height:100%}
+      body{
+        margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        color:var(--ink); background:var(--bg); display:grid; place-items:center; padding:20px;
+        background-image: radial-gradient(50% 60% at 50% 0%, rgba(46,230,166,.12), transparent 60%),
+                          radial-gradient(60% 60% at 100% 0%, rgba(159,192,255,.10), transparent 60%);
+      }
+      .wrap{width:min(1000px,100%)}
+      .hero{display:grid; gap:10px; text-align:center; margin-bottom:16px}
+      .hero h1{margin:0; font-size:clamp(24px,4vw,40px); letter-spacing:.2px}
+      .hero p{margin:0; color:var(--muted)}
+      .grid{display:grid; gap:16px; grid-template-columns: 1fr}
+      .card{background:var(--panel); border-radius:18px; padding:16px; box-shadow:0 12px 30px rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.06)}
+      .features{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px}
+      .chip{background: rgba(46,230,166,.12); color:#c9ffef; border:1px solid rgba(46,230,166,.3); padding:10px 12px; border-radius:12px; text-align:center; font-size:14px}
+      .note{font-size:13px; color:#cfe0ff; opacity:.9; margin-top:10px}
+      footer{margin-top:14px; text-align:center; color:#b9c6ff; font-size:12px; opacity:.8}
+      /* Full-width widget */
+      elevenlabs-convai{display:block; width:100%}
+      /* simple map grid accent */
+      .maplines{position:absolute; inset:0; pointer-events:none; opacity:.12; mask-image:radial-gradient(60% 60% at 50% 30%, black, transparent 70%)}
+      svg{display:block}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="hero">
+        <h1>GIS Study Agent</h1>
+        <p>Ask GIS questions, practice terms, and get real‑time voice explanations. Topics: projections, coordinate systems, geoprocessing, ArcGIS & QGIS basics, data types, and map design.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <!-- ElevenLabs Conversational AI embed -->
+          <!-- Replace agent-id if you clone this for another agent -->
+          <elevenlabs-convai
+            agent-id="agent_7801k2x10bv8e7paj705k3ykyv74"
+            variant="expanded"
+            override-first-message="Hi! I’m your GIS study buddy. Ask about projections vs. datums, WGS84 vs. NAD83, vector vs. raster, buffers, clips, joins, or map layout tips."
+            action-text="Start GIS Session"
+          ></elevenlabs-convai>
+          <p class="note">If you see a permissions error, make the agent public or allowlist this domain in the agent’s Security settings.</p>
+
+          <div class="features">
+            <div class="chip">📐 Projections & Datums</div>
+            <div class="chip">🗺️ Coordinate Systems</div>
+            <div class="chip">🔍 Vector vs. Raster</div>
+            <div class="chip">🧩 Joins & Relates</div>
+            <div class="chip">🧭 Geocoding & Georeferencing</div>
+            <div class="chip">🛠️ Buffers, Clips, Dissolves</div>
+          </div>
+        </div>
+        <footer>Embedded with ElevenLabs Conversational AI Widget · Tip: use headphones and grant mic permission for best results.</footer>
+      </div>
+    </div>
+
+    <!-- Subtle map grid accent -->
+    <div class="maplines" aria-hidden="true">
+      <svg width="100%" height="100%">
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(159,192,255,.3)" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)"/>
+      </svg>
+    </div>
+
+    <!-- Load the widget runtime (async) -->
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+  </body>
+</html>
